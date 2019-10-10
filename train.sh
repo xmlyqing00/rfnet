@@ -15,7 +15,7 @@ cp -r $source $save
 
 echo "Saved to "$save""
 
-nohup python -utt train.py --ver=$ver --save=$save --det-step=1 --des-step=2 > $save/$time.txt &
+nohup python3 -utt train.py --ver=$ver --save=$save --det-step=1 --des-step=2 > $save/$time.txt &
 sleep 1s
 tail -f $save/$time.txt
 

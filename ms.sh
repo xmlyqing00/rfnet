@@ -7,6 +7,6 @@ date=$3
 model=$4
 resume=""$root"/"$date"/model/"$model""
 
-python -utt ms.py --data=view --resume=$resume
-python -utt ms.py --data=illu --resume=$resume
-python -utt ms.py --data=ef --resume=$resume
+python3 -utt ms.py --data=view --resume=$resume
+python3 -utt ms.py --data=illu --resume=$resume
+python3 -utt ms.py --data=ef --resume=$resume
