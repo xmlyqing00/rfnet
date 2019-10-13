@@ -359,13 +359,10 @@ def soft_max_and_argmax_1d(
     )  # (B, H, W, 10)
 
     score_map = torch.sum(input * input_softmax1, dim=dim, keepdim=keepdim)
-    print(input.size())
     scale_list_shape = [1] * len(input.size())
     scale_list_shape[dim] = -1
-    print('before', scale_list.shape)
     scale_list = scale_list.view(scale_list_shape).to(input_softmax2.device)
     scale_map = torch.sum(scale_list * input_softmax2, dim=dim, keepdim=keepdim)
-    print('after', scale_list.shape)
 
     if orint_maps is not None:
         orint_map = torch.sum(
