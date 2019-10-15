@@ -57,6 +57,11 @@ if __name__ == "__main__":
     # detect and compute
     ###############################################################################
     img1_path, img2_path = args.imgpath.split("@")
+    [test_folder, img1_name] = img1_path.rsplit('/', 1)
+    img1_name = img1_name.split('.')[0]
+    [_, img2_name] = img2_path.rsplit('/', 1)
+    img2_name = img2_name.split('.')[0]
+
     kp1, des1, img1 = model.detectAndCompute(img1_path, device, (240, 320))
     kp2, des2, img2 = model.detectAndCompute(img2_path, device, (240, 320))
 
@@ -84,6 +89,16 @@ if __name__ == "__main__":
         return img
 
     img1, img2 = reverse_img(img1), reverse_img(img2)
+
+    # new_mkp1 = []
+    # new_mkp2 = []
+    # for i in range(len(mkp1)):
+    #     if abs(mkp1[i][2] - mkp2[i][2]) > 2:
+    #         new_mkp1.append(mkp1[i])
+    #         new_mkp2.append(mkp2[i])
+    # mkp1 = new_mkp1
+    # mkp2 = new_mkp2
+
     keypoints1 = list(map(to_cv2_kp, mkp1))
     keypoints2 = list(map(to_cv2_kp, mkp2))
     DMatch = list(map(to_cv2_dmatch, np.arange(0, len(keypoints1))))
@@ -91,4 +106,7 @@ if __name__ == "__main__":
     # matches1to2	Matches from the first image to the second one, which means that
     # keypoints1[i] has a corresponding point in keypoints2[matches[i]] .
     outImg = cv2.drawMatches(img1, keypoints1, img2, keypoints2, DMatch, None)
-    cv2.imwrite("outImg.png", outImg)
+
+    result_path = f'{test_folder}/matching_{img1_name}_{img2_name}.png'
+    print('Result path:', result_path)
+    cv2.imwrite(result_path, outImg)
