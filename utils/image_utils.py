@@ -267,7 +267,7 @@ def topk_map(maps, k=512):
     row_idx = indices.contiguous().view(-1).cpu().detach().numpy()
     batch_indexes = (batch_idx, row_idx)
 
-    topk_mask_flat = torch.zeros(maps_flat.size(), dtype=torch.uint8).to(maps.device)
+    topk_mask_flat = torch.zeros(maps_flat.size(), dtype=torch.bool).to(maps.device)
     topk_mask_flat[batch_indexes] = 1
 
     mask = topk_mask_flat.view(batch, height, width, -1)

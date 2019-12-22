@@ -48,8 +48,8 @@ class RFNetModule(nn.Module):
 
         # each centX, centY, centZ is (B, H, W, 1)
         centX, centY, centZ = imgBatchXYZ(B, H, W).to(im2_scale.device).chunk(3, dim=3)
-        print('centX', centX)
-        print('centX', centX.shape)
+        # print('centX', centX)
+        # print('centX', centX.shape)
 
         """get im1w scale maps"""
         half_scale = im2_scale // 2

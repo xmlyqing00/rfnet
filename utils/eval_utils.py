@@ -61,11 +61,11 @@ def vis_descriptor_with_patches(endpoint, cfg, saveimg=False, imname=None):
             chunks=2, dim=1
         )  # each is (topk, 1, 32, 32)
         tim = cv2.cvtColor(
-            cv2.resize(cv2.imread("./tools/t.jpg"), (psize, psize)).astype(np.uint8),
+            cv2.resize(cv2.imread("./tools/t.jpg"), (psize, psize)).astype(np.bool),
             cv2.COLOR_RGB2GRAY,
         )
         fim = cv2.cvtColor(
-            cv2.resize(cv2.imread("./tools/f.jpg"), (psize, psize)).astype(np.uint8),
+            cv2.resize(cv2.imread("./tools/f.jpg"), (psize, psize)).astype(np.bool),
             cv2.COLOR_RGB2GRAY,
         )
         flagim = (

@@ -86,6 +86,9 @@ def parse_parms():
     parser.add_argument(
         "--des-step", default=2, type=int, help="train descriptor step(defualt: 2)"
     )
+    parser.add_argument(
+        "--start-epoch", default=0, type=int, help="Start epoch (default: 0)"
+    )
     return parser.parse_args()
 
 
@@ -284,7 +287,8 @@ if __name__ == "__main__":
         if os.path.isfile(args.resume):
             print(f"{gct()} : Loading checkpoint {args.resume}")
             checkpoint = torch.load(args.resume)
-            args.start_epoch = checkpoint["epoch"]
+            if args.start_epoch == 0:
+                args.start_epoch = checkpoint["epoch"]
             model.load_state_dict(checkpoint["state_dict"])
             det_optim.load_state_dict(checkpoint["det_optim"])
             des_optim.load_state_dict(checkpoint["des_optim"])
@@ -420,28 +424,29 @@ if __name__ == "__main__":
     for epoch in range(start_epoch, end):
         epoch_start_time = time.time()
         train()
-        checkpoint, val_ms = evaluate(val_data)
+        if epoch % 10 == 0:
+            checkpoint, val_ms = evaluate(val_data)
 
-        # Save the model if the match score is the best we've seen so far.
-        if not best_ms or val_ms >= best_ms:
-            state = {
-                "epoch": epoch,
-                "state_dict": model.state_dict(),
-                "det_optim": det_optim.state_dict(),
-                "des_optim": des_optim.state_dict(),
-            }
-            filename = f"{args.save}/model/e{epoch:03d}_{checkpoint}.pth.tar"
-            torch.save(state, filename)
-            best_ms = val_ms
-            best_f = filename
+            # Save the model if the match score is the best we've seen so far.
+            if not best_ms or val_ms >= best_ms:
+                state = {
+                    "epoch": epoch,
+                    "state_dict": model.state_dict(),
+                    "det_optim": det_optim.state_dict(),
+                    "des_optim": des_optim.state_dict(),
+                }
+                filename = f"{args.save}/model/e{epoch:03d}_{checkpoint}.pth.tar"
+                torch.save(state, filename)
+                best_ms = val_ms
+                best_f = filename
 
-        print("-" * 96)
-        print(
-            "| end of epoch {:3d} | time: {:5.02f}s | val ms {:5.03f} | best ms {:5.03f} | ".format(
-                epoch, (time.time() - epoch_start_time), val_ms, best_ms
+            print("-" * 96)
+            print(
+                "| end of epoch {:3d} | time: {:5.02f}s | val ms {:5.03f} | best ms {:5.03f} | ".format(
+                    epoch, (time.time() - epoch_start_time), val_ms, best_ms
+                )
             )
-        )
-        print("-" * 96)
+            print("-" * 96)
 
     # Load the best saved model.
     with open(best_f, "rb") as f:

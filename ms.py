@@ -3,6 +3,7 @@
 # @Author  : xylon
 import random
 import argparse
+from tqdm import tqdm
 from torchvision import transforms
 from torch.utils.data import DataLoader
 
@@ -92,7 +93,7 @@ if __name__ == "__main__":
     model.eval()
     PreNN, PreNNT, PreNNDR = 0, 0, 0
     with torch.no_grad():
-        for i_batch, sample_batched in enumerate(data_loader, 1):
+        for i_batch, sample_batched in tqdm(enumerate(data_loader, 1)):
             batch = parse_batch(sample_batched, device)
 
             TPNN, PNN, TPNNT, PNNT, TPNNDR, PNNDR = eval_model(

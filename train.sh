@@ -3,7 +3,7 @@ gpuid=$1
 
 time="$(date "+%m_%d_%H_%M")"
 source="$(pwd)"
-save="$(dirname "$(pwd)")/runs/"$time""
+save="$(dirname "$(pwd)")/runs/rf_"$time""
 
 export CUDA_VISIBLE_DEVICES=$gpuid
 

@@ -20,15 +20,15 @@ __C.PROJ.USE_GPU = True
 __C.PROJ.SEED = 0
 
 # training, evaluate and test data
-__C.PROJ.TRAIN = "view"
+__C.PROJ.TRAIN = "view_h"
 __C.PROJ.TRAIN_ALL = False
 __C.PROJ.TRAIN_PPT = 0.8
 
-__C.PROJ.EVAL = "view"
+__C.PROJ.EVAL = "view_h"
 __C.PROJ.EVAL_ALL = False
 __C.PROJ.EVAL_PPT = 0.1
 
-__C.PROJ.TEST = "view"
+__C.PROJ.TEST = "view_h"
 __C.PROJ.TEST_ALL = False
 __C.PROJ.TEST_PPT = 0.1
 
@@ -146,6 +146,30 @@ __C.view.MEAN = 0.4230204841414801
 __C.view.STD = 0.25000138349993173
 __C.view.NUM = 295
 
+# View train sequence Mean and Std
+__C.view_e = edict()
+__C.view_e.csv = "hpatch_view.csv"
+__C.view_e.root = "../data/hpatch_v_sequence_rot_e"
+__C.view_e.MEAN = 0.4230204841414801
+__C.view_e.STD = 0.25000138349993173
+__C.view_e.NUM = 295
+
+# View train sequence Mean and Std
+__C.view_m = edict()
+__C.view_m.csv = "hpatch_view.csv"
+__C.view_m.root = "../data/hpatch_v_sequence_rot_m"
+__C.view_m.MEAN = 0.4230204841414801
+__C.view_m.STD = 0.25000138349993173
+__C.view_m.NUM = 295
+
+# View train sequence Mean and Std
+__C.view_h = edict()
+__C.view_h.csv = "hpatch_view.csv"
+__C.view_h.root = "../data/hpatch_v_sequence_rot_h"
+__C.view_h.MEAN = 0.4230204841414801
+__C.view_h.STD = 0.25000138349993173
+__C.view_h.NUM = 295
+
 # illumination sequence Mean and Std
 __C.illu = edict()
 __C.illu.csv = "hpatch_illum.csv"
@@ -153,6 +177,30 @@ __C.illu.root = "../data/hpatch_i_sequence"
 __C.illu.MEAN = 0.4337542740124942
 __C.illu.STD = 0.2642307153894012
 __C.illu.NUM = 285
+
+# illumination sequence Mean and Std
+__C.illu_e = edict()
+__C.illu_e.csv = "hpatch_illum.csv"
+__C.illu_e.root = "../data/hpatch_i_sequence"
+__C.illu_e.MEAN = 0.4337542740124942
+__C.illu_e.STD = 0.2642307153894012
+__C.illu_e.NUM = 285
+
+# illumination sequence Mean and Std
+__C.illu_m = edict()
+__C.illu_m.csv = "hpatch_illum.csv"
+__C.illu_m.root = "../data/hpatch_i_sequence"
+__C.illu_m.MEAN = 0.4337542740124942
+__C.illu_m.STD = 0.2642307153894012
+__C.illu_m.NUM = 285
+
+# illumination sequence Mean and Std
+__C.illu_h = edict()
+__C.illu_h.csv = "hpatch_illum.csv"
+__C.illu_h.root = "../data/hpatch_i_sequence"
+__C.illu_h.MEAN = 0.4337542740124942
+__C.illu_h.STD = 0.2642307153894012
+__C.illu_h.NUM = 285
 
 # illumination sequence Mean and Std
 __C.ef = edict()

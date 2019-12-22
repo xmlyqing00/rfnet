@@ -84,7 +84,7 @@ if __name__ == "__main__":
         :return: RBG image
         """
         img = img.permute(0, 2, 3, 1)[0].cpu().detach().numpy()
-        img = (img * 255).astype(np.uint8)  # change to opencv format
+        img = (img * 255).astype(np.bool)  # change to opencv format
         img = cv2.cvtColor(img, cv2.COLOR_GRAY2RGB)  # gray to rgb
         return img
 
